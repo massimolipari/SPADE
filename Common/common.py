@@ -84,7 +84,7 @@ def load_config(corpus_name):
                      'speakers', 'vowel_inventory', 'stressed_vowels', 'sibilant_segments'
                      ]
     with open(path, 'r', encoding='utf8') as f:
-        conf = yaml.load(f)
+        conf = yaml.safe_load(f)
     missing_keys = []
     for k in expected_keys:
         if k not in conf:
