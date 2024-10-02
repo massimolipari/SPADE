@@ -3,6 +3,7 @@ def basic_enrichment(corpus, syllabics, pauses):
     from polyglotdb import CorpusContext
     import time
 
+
     with CorpusContext(corpus) as g:
         if not 'utterance' in g.annotation_types:
             ## encode utterances based on presence of an intervening pause
@@ -78,6 +79,7 @@ def basic_enrichment(corpus, syllabics, pauses):
             time_taken = time.time() - begin
             print("encoded stress")
 
+
 def lexicon_enrichment(corpus, unisyn_spade_directory, dialect_code):
     """Enrich the database with lexical information, such as stress position and UNISYN phone labels."""
     from polyglotdb import CorpusContext
@@ -142,11 +144,12 @@ def main():
 
     vowel_inventory = ["I", "E", "{", "V", "Q", "U", "@", "i","#", "$", "u", "3", "1", "2","4", "5", "6", "7", "8", "9", "c","q", "O", "~"]
     extra_syllabic_segments = ["B","F","H","L", "P", "C"]
+    syllabics = vowel_inventory + extra_syllabic_segments
 
     ## Perform linguistic, speaker, and acoustic enrichment
     lexicon_enrichment(corpus_name, unisyn_spade_directory, dialect_code)
     speaker_enrichment(corpus_name, speaker_enrichment_file)
-    basic_enrichment(corpus_name, vowel_inventory['vowel_inventory'] + extra_syllabic_segments, pauses)
+    basic_enrichment(corpus_name, syllabics, pauses)
 
     print('Enrichment complete!')
 
