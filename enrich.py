@@ -1,5 +1,7 @@
 def basic_enrichment(corpus, syllabics, pauses):
     """Enrich the corpus database with syllable and utterance information."""
+    from polyglotdb import CorpusContext
+    import time
 
     with CorpusContext(corpus) as g:
         if not 'utterance' in g.annotation_types:
@@ -78,6 +80,10 @@ def basic_enrichment(corpus, syllabics, pauses):
 
 def lexicon_enrichment(corpus, unisyn_spade_directory, dialect_code):
     """Enrich the database with lexical information, such as stress position and UNISYN phone labels."""
+    from polyglotdb import CorpusContext
+    import time
+    import os
+    from polyglotdb.io.enrichment import enrich_lexicon_from_csv
 
     enrichment_dir = os.path.join(unisyn_spade_directory, 'enrichment_files')
     if not os.path.exists(enrichment_dir):
@@ -107,6 +113,10 @@ def lexicon_enrichment(corpus, unisyn_spade_directory, dialect_code):
 
 def speaker_enrichment(corpus, speaker_file):
     """Enrich the database with speaker information (e.g. age, dialect) from a speaker metadata file."""
+    from polyglotdb import CorpusContext
+    import time
+    import os
+    from polyglotdb.io.enrichment import enrich_speakers_from_csv
 
     if not os.path.exists(speaker_file):
         print('Could not find {}, skipping speaker enrichment.'.format(speaker_file))
@@ -122,11 +132,6 @@ def speaker_enrichment(corpus, speaker_file):
 
 
 def main():
-    from polyglotdb import CorpusContext
-    import time
-    import os
-    from polyglotdb.io.enrichment import enrich_speakers_from_csv, enrich_lexicon_from_csv
-
     corpus_root = '/home/mlipari/spade-SOTC/audio_and_transcripts'
     corpus_name = 'spade-SOTC'
 
