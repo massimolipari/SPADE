@@ -33,7 +33,7 @@ base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ## default values for connecting to the server
 server_ip = "localhost"
 docker_ip = "app"
-server_port = 7474
+server_port = 8086
 
 ## default values for formant enrichment (see formant analysis functions below)
 duration_threshold = 0.05
