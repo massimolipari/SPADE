@@ -66,9 +66,7 @@ if __name__ == '__main__':
     ip = common.server_ip
     if docker:
         ip = common.docker_ip
-    with ensure_local_database_running(corpus_name, port=common.server_port, ip=ip, token=common.load_token()) as params:
-        print(params)
-        config = CorpusConfig(corpus_name, **params)
+    with CorpusConfig(corpus_name) as config:
         config.formant_source = 'praat'
 
         ## Common set up: see commony.py for details of these functions ##
