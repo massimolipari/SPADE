@@ -114,3 +114,5 @@ SPADE-analysis/\.RData
 SPADE-analysis/\.Rhistory
 
 ProdCat/
+
+**/.DS_Store
