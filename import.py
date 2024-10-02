@@ -24,4 +24,3 @@ with CorpusContext(corpus_name) as c:
 
     for r in results:
         print('The phone {} had {} occurrences and an average duration of {}.'.format(r['phone'], r['count'], r['average_duration']))
-
