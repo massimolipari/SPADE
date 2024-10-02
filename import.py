@@ -34,7 +34,6 @@ import common
 
 from polyglotdb.utils import ensure_local_database_running
 from polyglotdb import CorpusConfig
-from polyglotdb import CorpusContext
 
 ## Define and process command line arguments
 if __name__ == '__main__':
@@ -67,17 +66,20 @@ if __name__ == '__main__':
     ip = common.server_ip
     if docker:
         ip = common.docker_ip
-    with CorpusContext(corpus_name) as c:
+    with ensure_local_database_running(corpus_name, port=common.server_port, ip=ip, token=common.load_token()) as params:
+        config = CorpusConfig(corpus_name, **params)
+        config.formant_source = 'praat'
+
         ## Common set up: see commony.py for details of these functions ##
         ## Check if the corpus already has an associated graph object; if not,
         ## perform importing and parsing of the corpus files
-        common.loading(c, corpus_conf['corpus_directory'], corpus_conf['input_format'])
+        common.loading(config, corpus_conf['corpus_directory'], corpus_conf['input_format'])
 
         ## Perform linguistic, speaker, and acoustic enrichment
-        common.lexicon_enrichment(c, corpus_conf['unisyn_spade_directory'], corpus_conf['dialect_code'])
-        common.speaker_enrichment(c, corpus_conf['speaker_enrichment_file'])
+        common.lexicon_enrichment(config, corpus_conf['unisyn_spade_directory'], corpus_conf['dialect_code'])
+        common.speaker_enrichment(config, corpus_conf['speaker_enrichment_file'])
 
-        common.basic_enrichment(c, corpus_conf['vowel_inventory'] + corpus_conf['extra_syllabic_segments'], corpus_conf['pauses'])
+        common.basic_enrichment(config, corpus_conf['vowel_inventory'] + corpus_conf['extra_syllabic_segments'], corpus_conf['pauses'])
 
         # ## Check if the YAML specifies the path to the YAML file
         # ## if not, load the prototypes file from the default location
