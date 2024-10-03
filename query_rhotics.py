@@ -63,5 +63,5 @@ def main():
         end = time.time()
         print('Export took: {}'.format(end - beg))
 
-if __name__ == 'main':
+if __name__ == '__main__':
     main()
