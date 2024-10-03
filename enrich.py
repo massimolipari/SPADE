@@ -11,7 +11,7 @@ def basic_enrichment(corpus, syllabics, pauses):
             print('encoding utterances')
             begin = time.time()
             g.encode_pauses(pauses)
-            g.encode_utterances(min_pause_length=0.15)
+            g.encode_utterances(min_pause_length = 0.15)
             time_taken = time.time() - begin
             print('Utterance enrichment took: {}'.format(time_taken))
 
@@ -75,7 +75,7 @@ def basic_enrichment(corpus, syllabics, pauses):
         elif syllabics and re.search(r"\d", syllabics[0]) and not g.hierarchy.has_type_property('syllable',
                                                                                                 'stress'):  # If stress is included in the vowels
             begin = time.time()
-            g.encode_stress_to_syllables("[0-9]", clean_phone_label=False)
+            g.encode_stress_to_syllables('[0-9]', clean_phone_label = False)
             time_taken = time.time() - begin
             print("encoded stress")
 
