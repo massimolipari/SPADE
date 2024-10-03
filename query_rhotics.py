@@ -6,7 +6,7 @@ def main():
 
     rhotics = ['ar', 'or', 'our', '@r', 'aer', 'oir', 'owr', 'ir', 'er', 'eir', 'ur']
     r = ['r', 'R', 'r\\']
-    csv_path = '/home/mlipari/rhotics.csv'
+    csv_path = '/home/mlipari/test.csv'
 
     print('Exporting rhotic tokens for {}'.format(corpus_name))
     beg = time.time()
@@ -17,8 +17,8 @@ def main():
         print('Applying filters...')
         q = q.filter(c.phone.label.in_(r),
                     #  c.phone.syllable.word.unisynprimstressedvowel1.in_(rhotics),
-                     c.phone.duration >= 0.05,
-                     c.phone.end == c.phone.word.end,
+                    # c.phone.duration >= 0.05,
+                    # c.phone.end == c.phone.word.end,
                      )
         
         print('Querying...')
