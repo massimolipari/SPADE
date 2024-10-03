@@ -16,7 +16,7 @@ def main():
 
         print('Applying filters...')
         q = q.filter(c.phone.label.in_(r),
-                     c.phone.syllable.word.unisynprimstressedvowel1.in_(rhotics),
+                    #  c.phone.syllable.word.unisynprimstressedvowel1.in_(rhotics),
                      c.phone.duration >= 0.05,
                      c.phone.end == c.phone.word.end,
                      )
